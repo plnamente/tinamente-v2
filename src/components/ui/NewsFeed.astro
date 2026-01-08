@@ -1,0 +1,31 @@
+---
+// Simulação de Feed via Mock (Pode ser integrado com API no futuro)
+const news = [
+    { title: "Vulnerabilidade Crítica no Kernel Linux atinge Servidores Cloud", time: "2h atrás", source: "SecurityWeek" },
+    { title: "Framework ITIL 4 ganha novas diretrizes para IA em ITSM", time: "5h atrás", source: "The Register" },
+    { title: "Ataque de Ransomware paralisa infraestrutura crítica em SP", time: "1d atrás", source: "G1 Tecnologia" },
+];
+---
+
+<div class="space-y-4">
+    <div class="flex items-center justify-between mb-4">
+        <h3 class="text-white font-jakarta font-bold text-xs uppercase tracking-widest">Global Cyber Feed</h3>
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+    </div>
+    
+    <div class="space-y-3">
+        {news.map(item => (
+            <div class="p-4 border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] transition-colors rounded group cursor-pointer">
+                <div class="flex justify-between text-[10px] font-mono text-slate-500 mb-1">
+                    <span>{item.source}</span>
+                    <span class="group-hover:text-cyber-blue">{item.time}</span>
+                </div>
+                <p class="text-xs text-slate-300 group-hover:text-white transition-colors leading-snug">{item.title}</p>
+            </div>
+        ))}
+    </div>
+    
+    <button class="w-full py-2 text-[10px] font-mono text-slate-500 border border-dashed border-white/10 hover:border-cyber-blue hover:text-cyber-blue transition-all uppercase mt-2">
+        Sincronizar Feed
+    </button>
+</div>

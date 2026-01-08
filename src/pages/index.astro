@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Engenharia de Confiança">
+	<main class="relative min-h-screen">
+		
+		<!-- HERO SECTION -->
+		<section class="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
+			<!-- Glow sutil -->
+			<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 blur-[140px] rounded-full pointer-events-none"></div>
+
+			<div class="text-center z-10 space-y-10 max-w-4xl">
+				<div class="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/5 bg-white/5 text-slate-400 text-[10px] font-mono tracking-[0.3em] uppercase">
+					<span class="w-1 h-1 rounded-full bg-cyber-blue shadow-[0_0_8px_#00d4ff]"></span>
+					Núcleo de Operações Ativo
+				</div>
+
+				<h1 class="text-5xl md:text-7xl font-bold tracking-tight text-white leading-[1.1] font-jakarta">
+					Inteligência que <span class="text-cyber-blue drop-shadow-[0_0_15px_rgba(0,212,255,0.2)]">protege</span>,<br />
+					estratégia que <span class="text-slate-200">acolhe</span>.
+				</h1>
+
+				<p class="max-w-2xl mx-auto text-slate-400 text-lg md:text-xl font-light leading-relaxed">
+					Na <span class="text-white font-medium">T.I. NA MENTE</span>, a tecnologia é o meio, mas a sua tranquilidade é o fim. Unimos precisão técnica e consultoria próxima para blindar o que é essencial para você.
+				</p>
+
+				<div class="flex flex-col sm:flex-row gap-5 justify-center pt-6">
+					<a href="/servicos" class="px-10 py-4 bg-white text-deep-space font-semibold rounded hover:bg-cyber-blue hover:text-white transition-all font-jakarta tracking-wide text-sm">
+						VER CAPACIDADES
+					</a>
+					<a href="/sobre" class="px-10 py-4 border border-white/10 text-white font-semibold rounded hover:bg-white/5 transition-all font-jakarta tracking-wide text-sm">
+						NOSSA HISTÓRIA
+					</a>
+				</div>
+			</div>
+		</section>
+
+        <!-- SEÇÃO: POR QUE NÓS? -->
+        <section class="py-24 border-t border-white/5 bg-black/20">
+            <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 text-center">
+                <div class="space-y-4">
+                    <div class="text-cyber-blue text-4xl font-bold font-jakarta">01</div>
+                    <h3 class="text-white font-semibold tracking-wider font-jakarta">FOCO NO RESULTADO</h3>
+                    <p class="text-slate-500 text-sm">Soluções pensadas para a continuidade e o crescimento do seu negócio.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="text-cyber-blue text-4xl font-bold font-jakarta">02</div>
+                    <h3 class="text-white font-semibold tracking-wider font-jakarta">ENGENHARIA DE ELITE</h3>
+                    <p class="text-slate-500 text-sm">Especialistas em Rust e Python construindo ferramentas seguras e escaláveis.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="text-cyber-blue text-4xl font-bold font-jakarta">03</div>
+                    <h3 class="text-white font-semibold tracking-wider font-jakarta">MINDSET GRC</h3>
+                    <p class="text-slate-500 text-sm">Governança e Riscos integrados nativamente em cada serviço prestado.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO: WHAT IF (O FUNIL DE CONVERSÃO) -->
+        <section class="py-32 relative overflow-hidden">
+            <!-- Background Cyber -->
+            <div class="absolute inset-0 bg-cyber-blue/5"></div>
+            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+            
+            <div class="max-w-5xl mx-auto px-6 relative z-10 text-center space-y-8">
+                <div class="inline-block p-4 border border-cyber-blue/30 rounded-2xl bg-deep-space/80 backdrop-blur-xl shadow-[0_0_30px_rgba(0,212,255,0.1)]">
+                    <h2 class="text-4xl md:text-6xl font-bold text-white font-jakarta mb-4">
+                        What if: <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-blue to-purple-500">E se...</span>
+                    </h2>
+                    <p class="text-lg md:text-2xl text-slate-300 font-light leading-relaxed max-w-3xl mx-auto italic">
+                        "...alguém lhe desse uma mão para que você pudesse implementar seus frameworks de forma mais fácil, como seria?"
+                    </p>
+                    
+                    <div class="mt-8">
+                        <p class="text-sm font-mono text-cyber-blue uppercase tracking-widest mb-6">Quer saber?</p>
+                        <a href="/login" class="inline-flex items-center gap-3 px-10 py-4 bg-cyber-blue text-deep-space font-bold rounded hover:bg-white hover:scale-105 transition-all font-orbitron tracking-widest text-sm shadow-[0_0_20px_rgba(0,212,255,0.4)]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            VENHA PARA A ÁREA DE MEMBROS
+                        </a>
+                    </div>
+                </div>
+                
+                <p class="text-slate-500 text-xs font-mono">
+                    Acesso Gratuito à Central de Inteligência & Café com seu Byte
+                </p>
+            </div>
+        </section>
+
+	</main>
+</BaseLayout>

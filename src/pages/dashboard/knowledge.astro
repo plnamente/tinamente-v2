@@ -1,0 +1,72 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+
+const categories = [
+    { name: "Frameworks Oficiais", icon: "shield" },
+    { name: "Apostilas de Treinamento", icon: "book" },
+    { name: "Relatórios de Ameaças", icon: "alert" }
+];
+
+const documents = [
+    { title: "Apostila FIM Vol. 1 - Fundamentos", category: "Apostilas de Treinamento", size: "2.4 MB", type: "PDF", locked: false },
+    { title: "Apostila FIM Vol. 2 - Resposta", category: "Apostilas de Treinamento", size: "3.1 MB", type: "PDF", locked: false },
+    { title: "CIS Controls v8 - Implementation Guide", category: "Frameworks Oficiais", size: "5.0 MB", type: "PDF", locked: false },
+    { title: "ITIL 4 Strategic Leader Handbook", category: "Frameworks Oficiais", size: "12 MB", type: "PDF", locked: false },
+    { title: "Relatório de Ameaças Q1 2026", category: "Relatórios de Ameaças", size: "1.2 MB", type: "PDF", locked: true }, // Exemplo de conteúdo bloqueado
+];
+---
+
+<DashboardLayout title="Central de Inteligência">
+    <div class="max-w-6xl mx-auto space-y-10">
+        
+        <header class="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-white/10 pb-8">
+            <div class="space-y-3">
+                <div class="text-cyber-blue font-mono text-xs tracking-[0.3em] uppercase">Acervo Técnico</div>
+                <h1 class="text-4xl font-bold text-white font-jakarta">Central de <span class="text-cyber-blue">Inteligência</span></h1>
+                <p class="text-slate-400 max-w-xl">Acesse nossa biblioteca de frameworks, guias de implementação e inteligência de ameaças.</p>
+            </div>
+            
+            <!-- Barra de Pesquisa -->
+            <div class="relative w-full md:w-64">
+                <input type="text" placeholder="Buscar documento..." class="w-full bg-black/40 border border-white/10 rounded px-4 py-2 text-sm text-white focus:border-cyber-blue outline-none transition-all pl-10">
+                <svg class="w-4 h-4 text-slate-500 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+        </header>
+
+        <!-- Filtros de Categoria -->
+        <div class="flex gap-4 overflow-x-auto pb-2">
+            <button class="px-4 py-2 bg-cyber-blue text-deep-space font-bold rounded text-xs whitespace-nowrap">Todos</button>
+            {categories.map(cat => (
+                <button class="px-4 py-2 bg-white/5 border border-white/10 text-slate-300 font-medium rounded text-xs hover:bg-white/10 whitespace-nowrap transition-colors">{cat.name}</button>
+            ))}
+        </div>
+
+        <!-- Grid de Documentos -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {documents.map(doc => (
+                <div class="group relative p-6 rounded-xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] transition-all cursor-pointer overflow-hidden">
+                    <!-- Status Indicator -->
+                    <div class={`absolute top-0 right-0 p-3 rounded-bl-xl ${doc.locked ? 'bg-red-500/10 text-red-500' : 'bg-emerald-500/10 text-emerald-500'}`}>
+                        {doc.locked ? 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> : 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                        }
+                    </div>
+
+                    <div class="mb-6 pt-2">
+                        <div class="w-12 h-12 rounded bg-white/5 flex items-center justify-center text-slate-300 mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                        </div>
+                        <div class="text-[10px] font-mono text-cyber-blue uppercase tracking-wider mb-2">{doc.category}</div>
+                        <h3 class="text-white font-bold font-jakarta leading-tight group-hover:text-cyber-blue transition-colors">{doc.title}</h3>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs text-slate-500 border-t border-white/5 pt-4 mt-auto">
+                        <span class="font-mono">{doc.type} • {doc.size}</span>
+                        <span class="group-hover:translate-x-1 transition-transform text-white">Download →</span>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</DashboardLayout>
