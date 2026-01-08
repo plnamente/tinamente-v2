@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Calculadora de Risco Financeiro">
+    <main class="max-w-7xl mx-auto px-6 py-32 mt-10">
+        
+        <header class="text-center mb-16">
+            <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-red-500/10 text-red-500 text-xs font-mono mb-4 border border-red-500/20">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                </span>
+                FERRAMENTA DE IMPACTO
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold text-white font-jakarta mb-4">Calculadora de <span class="text-cyber-blue">Risco Cibernético</span></h1>
+            <p class="text-slate-400 max-w-2xl mx-auto">
+                Quantifique o prejuízo financeiro de um ataque de Ransomware ou inatividade do sistema. 
+                Use estes dados para justificar o orçamento de segurança para a diretoria.
+            </p>
+        </header>
+
+        <div class="grid lg:grid-cols-2 gap-12 items-start" x-data="riskCalculator()">
+            
+            <!-- Painel de Inputs -->
+            <div class="p-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl">
+                <h3 class="text-xl font-bold text-white font-jakarta mb-6 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyber-blue"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                    Parâmetros do Negócio
+                </h3>
+                
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-mono text-slate-400 uppercase tracking-widest mb-2">Faturamento Anual (R$)</label>
+                        <input type="number" x-model="revenue" class="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:border-cyber-blue outline-none transition-all font-mono" placeholder="Ex: 10000000">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-mono text-slate-400 uppercase tracking-widest mb-2">Funcionários</label>
+                            <input type="number" x-model="employees" class="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:border-cyber-blue outline-none transition-all font-mono" placeholder="Ex: 50">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-mono text-slate-400 uppercase tracking-widest mb-2">Horas Parado</label>
+                            <input type="number" x-model="downtime" class="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:border-cyber-blue outline-none transition-all font-mono" placeholder="Ex: 24">
+                            <p class="text-[10px] text-slate-500 mt-1">Tempo médio de recuperação de Ransomware: 21 dias</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-mono text-slate-400 uppercase tracking-widest mb-2">Sensibilidade dos Dados</label>
+                        <select x-model="sensitivity" class="w-full bg-black/40 border border-white/10 rounded px-4 py-3 text-white focus:border-cyber-blue outline-none transition-all appearance-none">
+                            <option value="1.0">Baixa (Dados Públicos)</option>
+                            <option value="1.5">Média (Dados Internos)</option>
+                            <option value="2.5">Alta (LGPD/Financeiro/Saúde)</option>
+                        </select>
+                    </div>
+
+                    <div class="pt-4">
+                        <button class="w-full py-4 bg-cyber-blue text-deep-space font-bold font-orbitron rounded hover:bg-white transition-all shadow-[0_0_20px_rgba(0,212,255,0.3)]">
+                            GERAR RELATÓRIO DE RISCO
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Painel de Resultados (Reativo) -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-gradient-to-br from-red-500/10 to-transparent blur-3xl rounded-full pointer-events-none"></div>
+                
+                <div class="relative p-10 rounded-2xl border border-red-500/30 bg-[#0a0a0a] shadow-2xl">
+                    <h4 class="text-red-500 font-mono text-xs uppercase tracking-widest mb-2">Estimativa de Prejuízo Total</h4>
+                    
+                    <div class="text-5xl md:text-6xl font-bold text-white font-jakarta mb-2 tracking-tight">
+                        R$ <span x-text="calculateLoss()">0,00</span>
+                    </div>
+                    
+                    <p class="text-slate-400 text-sm mb-8">
+                        Este valor inclui perda de produtividade, receita não realizada e custos de recuperação técnica incidentais.
+                    </p>
+
+                    <div class="space-y-4 border-t border-white/10 pt-6">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-400">Custo por Hora Parada:</span>
+                            <span class="text-white font-mono" x-text="formatCurrency(hourlyCost())">R$ 0,00</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-400">Impacto Regulatório (Multa Est.):</span>
+                            <span class="text-white font-mono" x-text="formatCurrency(regulatoryFine())">R$ 0,00</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-4 bg-red-500/10 border border-red-500/20 rounded text-center">
+                        <p class="text-red-400 text-xs font-bold uppercase tracking-widest mb-1">Custo de Prevenção Estimado</p>
+                        <p class="text-white font-mono text-lg">Apenas ~5% do prejuízo</p>
+                    </div>
+                    
+                    <div class="mt-8 text-center">
+                         <a href="/contato" class="text-xs text-cyber-blue hover:text-white underline decoration-1 underline-offset-4 transition-colors">Falar com um especialista sobre mitigação</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</BaseLayout>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('riskCalculator', () => ({
+            revenue: 0,
+            employees: 0,
+            downtime: 0,
+            sensitivity: 1.0,
+
+            hourlyCost() {
+                // Cálculo simplificado: (Faturamento / 2000 horas úteis) + (Custo Médio Funcionário * Qtd)
+                const revenuePerHour = this.revenue > 0 ? this.revenue / (250 * 8) : 0; 
+                const laborCostPerHour = this.employees * 50; // Estimativa R$50/h custo empresa
+                return revenuePerHour + laborCostPerHour;
+            },
+
+            regulatoryFine() {
+                // Estimativa baseada em % do faturamento se dados sensíveis vazarem
+                if (this.sensitivity > 1.5) {
+                    return this.revenue * 0.02; // 2% do faturamento (Teto LGPD simplificado)
+                }
+                return 0;
+            },
+
+            calculateLoss() {
+                const operationalLoss = this.hourlyCost() * this.downtime;
+                const total = (operationalLoss * this.sensitivity) + this.regulatoryFine();
+                return new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(total);
+            },
+            
+            formatCurrency(value) {
+                 return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+            }
+        }))
+    })
+</script>
